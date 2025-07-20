@@ -1,0 +1,9 @@
+/uploads
+/memory_graphs
+/faiss_indexes
+/intermediate_results
+.env
+.env/
+env/
+view_intermediate_results.py
+__pycache__/

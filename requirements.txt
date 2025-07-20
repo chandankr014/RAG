@@ -1,0 +1,10 @@
+Flask
+python-dotenv
+PyMuPDF
+langchain
+langchain-google-genai
+faiss-cpu
+Werkzeug
+google-generativeai
+networkx
+spacy

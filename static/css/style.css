@@ -1,0 +1,638 @@
+/* Full Screen Layout */
+html, body {
+    height: 100%;
+    /* Removed overflow: hidden to allow proper scrolling */
+}
+
+.container-fluid {
+    height: 100vh;
+    overflow: hidden; /* Only restrict container overflow */
+}
+
+/* Sidebar Styling */
+.border-end {
+    border-color: #e9ecef !important;
+}
+
+/* Upload Area Styling */
+.upload-area {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background: #f8f9fa;
+    border: 2px dashed #dee2e6 !important;
+}
+
+.upload-area:hover {
+    background: #e9ecef;
+    border-color: #6c757d !important;
+}
+
+.upload-area.dragover {
+    background: #e3f2fd;
+    border-color: #2196f3 !important;
+    transform: scale(1.02);
+}
+
+/* Chat Interface - Enhanced Scrollable Design */
+.chat-container {
+    height: 100%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Prevent container overflow */
+}
+
+.chat-header {
+    flex-shrink: 0;
+    z-index: 10;
+    position: relative;
+}
+
+.messages-container {
+    flex: 1;
+    min-height: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.messages-scroll-area {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 1.5rem;
+    scroll-behavior: smooth;
+    
+    /* Custom scrollbar styling */
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e0 #f7fafc;
+}
+
+.messages-scroll-area::-webkit-scrollbar {
+    width: 8px;
+}
+
+.messages-scroll-area::-webkit-scrollbar-track {
+    background: #f7fafc;
+    border-radius: 4px;
+}
+
+.messages-scroll-area::-webkit-scrollbar-thumb {
+    background: #cbd5e0;
+    border-radius: 4px;
+    border: 2px solid #f7fafc;
+    transition: background 0.2s ease;
+}
+
+.messages-scroll-area::-webkit-scrollbar-thumb:hover {
+    background: #a0aec0;
+}
+
+.chat-input-area {
+    flex-shrink: 0;
+    background: white;
+    border-top: 1px solid #e9ecef;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+    z-index: 10;
+    position: relative;
+}
+
+.chat-input-container {
+    padding: 1.5rem;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.75rem;
+    background: #f8f9fa;
+    border: 2px solid #e9ecef;
+    border-radius: 20px;
+    padding: 0.75rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.input-wrapper:focus-within {
+    border-color: #2196f3;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1), 0 4px 12px rgba(0,0,0,0.1);
+    transform: translateY(-1px);
+}
+
+.chat-textarea {
+    flex: 1;
+    border: none !important;
+    background: transparent !important;
+    resize: none;
+    padding: 0.5rem 0;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    min-height: 20px;
+    max-height: 120px;
+    outline: none !important;
+    box-shadow: none !important;
+    font-family: inherit;
+}
+
+.chat-textarea::placeholder {
+    color: #6c757d;
+    font-style: italic;
+}
+
+.send-btn {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.send-btn:hover:not(:disabled) {
+    transform: scale(1.05);
+    box-shadow: 0 4px 16px rgba(102, 126, 234, 0.4);
+}
+
+.send-btn:disabled {
+    background: #e9ecef;
+    color: #6c757d;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.input-footer {
+    margin-top: 0.5rem;
+    padding-left: 0.5rem;
+}
+
+/* Messages Area - Enhanced Styling */
+#messagesArea {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-bottom: 1rem;
+    min-height: 100%;
+}
+
+/* Message Bubbles - Enhanced Design */
+.message {
+    animation: fadeInUp 0.4s ease;
+    position: relative;
+    max-width: 100%;
+}
+
+.message.user {
+    align-self: flex-end;
+    margin-left: 20%;
+}
+
+.message.assistant {
+    align-self: flex-start;
+    margin-right: 20%;
+}
+
+.message-bubble {
+    display: inline-block;
+    max-width: 100%;
+    padding: 1rem 1.25rem;
+    border-radius: 18px;
+    position: relative;
+    word-wrap: break-word;
+    line-height: 1.5;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+
+.message-bubble:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+}
+
+.message.user .message-bubble {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-bottom-right-radius: 6px;
+    text-align: left;
+}
+
+.message.assistant .message-bubble {
+    background: white;
+    color: #2d3748;
+    border: 1px solid #e2e8f0;
+    border-bottom-left-radius: 6px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+/* Technique-specific message styling */
+.message.assistant .message-bubble.decomposition {
+    border-left: 4px solid #ff9800;
+    background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+}
+
+.message.assistant .message-bubble.cot {
+    border-left: 4px solid #9c27b0;
+    background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+}
+
+.message.assistant .message-bubble.graph {
+    border-left: 4px solid #4caf50;
+    background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+}
+
+.message.assistant .message-bubble.basic {
+    border-left: 4px solid #2196f3;
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+}
+
+/* Message Metadata */
+.message-meta {
+    font-size: 0.75rem;
+    margin-top: 0.5rem;
+    opacity: 0.7;
+    font-weight: 500;
+}
+
+.message.user .message-meta {
+    text-align: right;
+    color: #6c757d;
+}
+
+.message.assistant .message-meta {
+    text-align: left;
+    color: #6c757d;
+}
+
+/* Technique Badge */
+.technique-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 12px;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.technique-badge.decomposition {
+    background: #fff3e0;
+    color: #e65100;
+    border: 1px solid #ffcc02;
+}
+
+.technique-badge.cot {
+    background: #f3e5f5;
+    color: #4a148c;
+    border: 1px solid #9c27b0;
+}
+
+.technique-badge.graph {
+    background: #e8f5e8;
+    color: #1b5e20;
+    border: 1px solid #4caf50;
+}
+
+.technique-badge.basic {
+    background: #e3f2fd;
+    color: #0d47a1;
+    border: 1px solid #2196f3;
+}
+
+/* Sub-questions Display */
+.sub-questions {
+    background: rgba(255,255,255,0.9);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-top: 0.75rem;
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.sub-questions h6 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.sub-questions ul {
+    margin: 0;
+    padding-left: 1.25rem;
+}
+
+.sub-questions li {
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-bottom: 0.25rem;
+    line-height: 1.4;
+}
+
+/* Graph Entities */
+.graph-entities {
+    background: rgba(76, 175, 80, 0.1);
+    border: 1px solid rgba(76, 175, 80, 0.2);
+    border-radius: 8px;
+    padding: 0.75rem;
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    color: #2e7d32;
+}
+
+/* Sources List */
+.sources-list {
+    background: rgba(0,0,0,0.05);
+    border-radius: 8px;
+    padding: 0.75rem;
+    margin-top: 0.75rem;
+    font-size: 0.8rem;
+}
+
+.sources-list h6 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 0.5rem;
+}
+
+.sources-list ul {
+    margin: 0;
+    padding-left: 1rem;
+}
+
+.sources-list li {
+    color: #6c757d;
+    margin-bottom: 0.25rem;
+    font-size: 0.8rem;
+}
+
+/* Loading Animation */
+.thinking-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    color: #6c757d;
+    background: rgba(248, 249, 250, 0.8);
+    border-radius: 12px;
+    margin: 0.5rem 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.thinking-indicator .spinner-border {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.75rem;
+    color: #667eea;
+}
+
+/* Quick Question Buttons */
+.quick-question {
+    transition: all 0.2s ease;
+    border-radius: 8px;
+    font-size: 0.85rem;
+}
+
+.quick-question:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Connection Status */
+#connectionStatus {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+}
+
+#connectionStatus .bi-circle-fill {
+    font-size: 0.5rem;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .col-md-4 {
+        height: 40vh;
+        overflow-y: auto;
+    }
+    
+    .col-md-8 {
+        height: 60vh;
+    }
+    
+    .message.user {
+        margin-left: 10%;
+    }
+    
+    .message.assistant {
+        margin-right: 10%;
+    }
+    
+    .message-bubble {
+        max-width: 100%;
+    }
+    
+    .chat-input-container {
+        padding: 1rem;
+    }
+}
+
+/* Custom Scrollbar for Technique Info */
+.technique-info {
+    max-height: 80px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #dee2e6 transparent;
+}
+
+.technique-info::-webkit-scrollbar {
+    width: 4px;
+}
+
+.technique-info::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.technique-info::-webkit-scrollbar-thumb {
+    background: #dee2e6;
+    border-radius: 2px;
+}
+
+/* File Upload Progress */
+.progress {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Alert Styling */
+.alert {
+    border: none;
+    border-radius: 12px;
+    font-size: 0.9rem;
+}
+
+.alert-info {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    color: #0d47a1;
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+    color: #1b5e20;
+}
+
+.alert-warning {
+    background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+    color: #e65100;
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+    color: #c62828;
+}
+
+/* Welcome Message */
+#welcomeMessage {
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    padding: 2rem;
+    text-align: center;
+}
+
+#welcomeMessage:hover {
+    opacity: 1;
+}
+
+/* Focus states for better accessibility */
+.chat-textarea:focus {
+    outline: none;
+}
+
+.input-wrapper:focus-within {
+    border-color: #2196f3;
+    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+    transition: all 0.2s ease;
+}
+
+/* Enhanced message spacing */
+.message + .message {
+    margin-top: 1.5rem;
+}
+
+/* Better text readability */
+.message-bubble {
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Improved contrast for better readability */
+.message.assistant .message-bubble {
+    color: #2d3748;
+    background: #ffffff;
+}
+
+/* Enhanced shadow effects */
+.chat-input-area {
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+}
+
+.message-bubble {
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+/* Auto-resize textarea */
+.chat-textarea {
+    overflow-y: hidden;
+    resize: none;
+}
+
+/* Ensure proper scrolling behavior */
+.row {
+    height: 100vh;
+    overflow: hidden;
+}
+
+.col-md-4, .col-md-8, .col-lg-3, .col-lg-9 {
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Sidebar scrollable content */
+.col-md-4 .h-100, .col-lg-3 .h-100 {
+    overflow: hidden;
+}
+
+.col-md-4 .flex-grow-1, .col-lg-3 .flex-grow-1 {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Critical fix for scrolling - ensure messages area can grow */
+.messages-scroll-area {
+    display: flex;
+    flex-direction: column;
+}
+
+#messagesArea {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-bottom: 1rem;
+}
+
+/* Ensure proper height calculation */
+.messages-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.messages-scroll-area {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
